@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import TaskList from './src/components/TaskList'
 
 export default function App() {
+  const [task, setTask] = useState([
+    { key: 1, task: 'Comprar Pão'},
+    { key: 2, task: 'Estudar React Native'},
+    { key: 3, task: 'Ir na academia hoje a noite'},
+    { key: 4, task: 'Comprar chocolate e coca-cola'},
+    { key: 5, task: 'Assistir o 1 video'},
+    
+  ]);
+  
+
  return(
    <SafeAreaView style={styles.container}>
      <StatusBar backgroundColor='#171d31' barStyle='light-content'/>
@@ -11,7 +22,13 @@ export default function App() {
        <Text style={styles.title}>Minhas Tarefas</Text>
      </View>
      
-     {/* Aqui vai a lista*/}
+     <FlatList 
+      marginHorizontal={10}
+      showsHorizontalScrollIndicator={false}
+      data={task}
+      keyExtractor={ (item) => String(item.key) }
+      renderItem={ ({ item }) => <TaskList data={item}/> }
+     />
 
      <TouchableOpacity style={styles.fab}>
        <Ionicons name="ios-add" size={35} color="#FFF" />
