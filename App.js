@@ -1,85 +1,55 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function App() {
-  const [peso, setPeso] = useState(''); // armazena o peso
-  const [altura, setAltura] = useState(''); // armazena a altura
+ return(
+   <SafeAreaView style={styles.container}>
+     <StatusBar backgroundColor='#171d31' barStyle='light-content'/>
 
-  function executarCalculos() {
-    const alt = altura / 100;
-    const imc = peso / (alt*alt);
+     <View style={styles.content}>
+       <Text style={styles.title}>Minhas Tarefas</Text>
+     </View>
+     
+     {/* Aqui vai a lista*/}
 
-    
-    if (imc < 18.6) {
-      alert('Você está abaixo do peso - IMC = ' + imc.toFixed(2));
-    } else if (imc >= 18.6 && imc < 24.9) {
-      alert('Você está com o peso ideal - IMC = ' + imc.toFixed(2));
-    } else if (imc >= 24.9 && imc < 34.9) {
-      alert('Você está levemente acima do peso - IMC = ' + imc.toFixed(2));
-    } else if (imc >= 34.9) {
-      alert('Você está acima do peso - IMC = ' + imc.toFixed(2));
-    }
-    setPeso('');
-    setAltura('');
-    
-  }
-    
+     <TouchableOpacity style={styles.fab}>
+       <Ionicons name="ios-add" size={35} color="#FFF" />
+     </TouchableOpacity>
 
-  return (
-    <View style={estilo.container}>
-      <Text style={estilo.title}> Calcule seu IMC</Text>
-
-      <TextInput 
-        style={estilo.input}
-        value={peso}        // valor dentro do componente
-        onChangeText={ (peso) => setPeso(peso) }  // toda vez que o campo mudar ele é salvo
-        placeholder="Peso (kg)"
-        keyboardType="numeric"
-      />
-
-      <TextInput 
-        style={estilo.input}
-        value={altura}        // valor dentro do componente
-        onChangeText={ (altura) => setAltura(altura) }  // toda vez que o campo mudar ele é salvo
-        placeholder="Altura (cm)"
-        keyboardType="numeric"
-      />
-
-      <TouchableOpacity style={estilo.botao}
-      onPress={executarCalculos}>
-        <Text style={estilo.textoBotao}>Calcular</Text>
-      </TouchableOpacity>
-      
-    </View>
-  );
+   </SafeAreaView>
+ ) 
 }
 
-const estilo = StyleSheet.create({
-  container: {
-    flex: 1
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor: "#171d31"
   },
-  title: {
+  title:{
+    marginTop: 10,
+    paddingBottom: 10,
+    fontSize: 25,
     textAlign: 'center',
-    marginTop: 25,
-    fontSize:30
+    color: '#FFF'
   },
-  input: {
-    backgroundColor: '#DDD',
-    borderRadius: 10,
-    margin: 15,
-    padding: 10,
-    color: '#000',
-    fontSize:23
-  },
-  botao: {
-    justifyContent: 'center',
+  fab:{
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    backgroundColor: '#0094FF',
     alignItems: 'center',
-    margin: 15,
-    backgroundColor: '#000000',
-    padding: 10,
-  },
-  textoBotao: {
-    color: '#FFF',
-    fontSize:25,
+    justifyContent: 'center',
+    borderRadius: 30,
+    right: 25,
+    bottom: 25,
+    elevation: 2,
+    zIndex: 9,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset:{
+      width: 1,
+      height: 3,
+    }
   }
 });
