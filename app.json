@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Organizador de Tarefas",
-    "slug": "tarefas",
+    "name": "Controle de Tarefas",
+    "slug": "ControleTarefas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,7 +28,7 @@
         "barStyle": "light-content",
         "backgroundColor": "000"
       },
-      "package":"com.kalizn.tarefas"
+      "package":"com.kalizn.controleTarefas"
     }
   }
 }
