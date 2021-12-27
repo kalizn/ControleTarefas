@@ -39,7 +39,7 @@ export default function App() {
       showsHorizontalScrollIndicator={false}
       data={task}
       keyExtractor={ (item) => String(item.key) }
-      renderItem={ ({ item }) => <TaskList data={item}/> }
+      renderItem={ ({ item }) => <TaskList data={item} handleDelete={handleDelete}/> }
      />
      
      
