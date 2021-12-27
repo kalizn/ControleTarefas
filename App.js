@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, 
   TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -27,9 +27,11 @@ export default function App() {
 
   }
 
-  function handleDelete(){
-    alert('OIII')
-  }
+  const handleDelete = useCallback((data) => {
+    const find = task.filter(r => r.key !== data.key);
+    setTask(find);
+  })
+
  return(
    <SafeAreaView style={styles.container}>
      <StatusBar backgroundColor='#171d31' barStyle='light-content'/>
