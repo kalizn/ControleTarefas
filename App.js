@@ -26,6 +26,10 @@ export default function App() {
     setInput('');
 
   }
+
+  function handleDelete(){
+    alert('OIII')
+  }
  return(
    <SafeAreaView style={styles.container}>
      <StatusBar backgroundColor='#171d31' barStyle='light-content'/>
