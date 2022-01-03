@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, StatusBar, 
   TouchableOpacity, FlatList, Modal, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import TaskList from './src/components/TaskList'
 import * as Animatable from 'react-native-animatable';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const AnimatedBtn = Animatable.createAnimatableComponent(TouchableOpacity);
 
 
@@ -12,6 +12,28 @@ export default function App() {
   const [task, setTask] = useState([]);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
+
+  //Buscando todas as tarefas ao iniciar o app
+  useEffect(()=> {
+    async function loadTasks(){
+      const taskStorage = await AsyncStorage.getItem('@task');
+
+      if(taskStorage){
+        setTask(JSON.parse(taskStorage));
+      }
+    }
+    loadTasks();
+  }, []);
+
+  //Salvando as tarefas
+  useEffect(()=> {
+    async function saveTasks(){
+      await AsyncStorage.setItem('@task', JSON.stringify(task));
+    }
+
+    saveTasks();
+
+  }, [task]);
   
   function handleAdd(){
     if (input === '') return;
